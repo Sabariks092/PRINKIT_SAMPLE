@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintKit - Custom Sample Poster</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #64748b;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent: #10b981;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image i {
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Mockup design in image */
+        .poster-mockup {
+            width: 140px;
+            height: 180px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mock-line {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .mock-line.short {
+            width: 60%;
+        }
+
+        .mock-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+
+        .product-info {
+            padding: 30px;
+        }
+
+        .product-header {
+            margin-bottom: 25px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .controls {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            outline: none;
+            background-color: #f8fafc;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1.5px solid var(--border);
+            margin-bottom: 25px;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .total-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .order-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.02);
+        }
+
+        .order-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .product-card {
+                border-radius: 0;
+            }
+
+            body {
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="product-card">
+            <!-- Visual Component -->
+            <div class="product-image">
+                <div class="poster-mockup">
+                    <div class="mock-circle"></div>
+                    <div class="mock-line"></div>
+                    <div class="mock-line"></div>
+                    <div class="mock-line short"></div>
+                    <div style="margin-top: auto;" class="mock-line"></div>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-info">
+                <div class="product-header">
+                    <h1 class="product-title">Custom Sample Poster</h1>
+                    <p class="product-price">Base Price: ₹<span id="base-price-display">499</span></p>
+                </div>
+
+                <div class="controls">
+                    <!-- Quantity -->
+                    <div class="control-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" class="input-field" value="1" min="1" step="1">
+                    </div>
+
+                    <!-- Quality/Variety -->
+                    <div class="control-group">
+                        <label for="quality">Quality / Variety</label>
+                        <select id="quality" class="input-field">
+                            <option value="Standard Matte">Standard Matte</option>
+                            <option value="Premium Glossy">Premium Glossy</option>
+                            <option value="Canvas Finish">Canvas Finish</option>
+                            <option value="Silk Smooth">Silk Smooth</option>
+                        </select>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="control-group">
+                        <label for="color">Color</label>
+                        <select id="color" class="input-field">
+                            <option value="Full Color">Full Color</option>
+                            <option value="Black & White">Black & White</option>
+                            <option value="Sepia">Sepia Tone</option>
+                            <option value="Minimal Gray">Minimal Gray</option>
+                        </select>
+                    </div>
+
+                    <!-- Design -->
+                    <div class="control-group">
+                        <label for="design">Design Style</label>
+                        <select id="design" class="input-field">
+                            <option value="Minimalist">Minimalist</option>
+                            <option value="Artistic">Artistic</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Vintage">Vintage</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Total Section -->
+                <div class="total-section">
+                    <span class="total-label">Subtotal</span>
+                    <span class="total-amount">₹<span id="total-price">499</span></span>
+                </div>
+
+                <!-- Action Button -->
+                <a href="#" id="order-now" class="order-btn">
+                    <span>Order via WhatsApp</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.437 2.503 1.163 3.486l-.751 2.742 2.81-.737c.944.514 2.022.808 3.169.809 3.185 0 5.768-2.585 5.768-5.766 0-3.181-2.583-5.766-5.768-5.766l-.023.036zm2.844 8.016c-.146.413-.856.742-1.18.782-.323.041-.741.071-1.188-.071-.247-.079-1.03-.404-1.956-1.229-.724-.644-1.214-1.439-1.355-1.685-.141-.246-.015-.379.108-.501.112-.11.247-.285.371-.428.123-.141.164-.24.246-.399.083-.16.041-.299-.021-.423-.062-.124-.555-1.336-.761-1.831-.2-.482-.406-.415-.555-.423l-.474-.007c-.165 0-.433.061-.66.311-.227.247-.866.845-.866 2.059 0 1.214.886 2.389 1.01 2.554.124.166 1.744 2.662 4.226 3.729.59.255 1.052.406 1.41.52.593.188 1.134.161 1.561.097.476-.071 1.464-.598 1.669-1.177.206-.579.206-1.073.144-1.177-.062-.103-.227-.165-.474-.288l-2.227-1.098c-.247-.123-.427-.185-.609.083-.182.268-.7 1.113-.856 1.319zM12 2C6.477 2 2 6.477 2 12c0 1.83.473 3.551 1.306 5.064L2 22l5.064-1.306C8.551 21.527 10.17 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.477 0-2.853-.404-4.028-1.102l-.29-.172-2.992.775.787-2.87-.19-.303A7.957 7.957 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const basePrice = 499;
+            const phone = "918778377449"; // Dummy client phone, change as needed
+
+            const quantityInput = document.getElementById('quantity');
+            const qualitySelect = document.getElementById('quality');
+            const colorSelect = document.getElementById('color');
+            const designSelect = document.getElementById('design');
+            const totalPriceEl = document.getElementById('total-price');
+            const orderBtn = document.getElementById('order-now');
+
+            function updatePrice() {
+                const qty = parseInt(quantityInput.value) || 0;
+                const total = basePrice * qty;
+                totalPriceEl.textContent = total.toLocaleString('en-IN');
+                updateWhatsAppLink();
+            }
+
+            function updateWhatsAppLink() {
+                const qty = quantityInput.value;
+                const quality = qualitySelect.value;
+                const color = colorSelect.value;
+                const design = designSelect.value;
+                const total = basePrice * qty;
+
+                const message = `Hi PrintKit, I want Custom Sample Poster with ${qty} quantity, ${quality} quality, in ${color} color, with ${design} design. Total Quote: ₹${total.toLocaleString('en-IN')}`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const waUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+                orderBtn.href = waUrl;
+            }
+
+            // Event Listeners
+            [quantityInput, qualitySelect, colorSelect, designSelect].forEach(element => {
+                element.addEventListener('input', updatePrice);
+            });
+
+            // Initial setup
+            updatePrice();
+        });
+    </script>
+
+</body>
+
+</html>
